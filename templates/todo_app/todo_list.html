@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Todo List</h2>
+    <ul>
+        {% for todo in todos %}
+            <li>
+                <strong>{{ todo.title }}</strong> 
+                (Due: {{ todo.due_date|default:"No date" }})
+                - {% if todo.resolved %}Resolved{% else %}Pending{% endif %}
+                <a href="{% url 'todo_update' todo.pk %}">Edit</a>
+                <a href="{% url 'todo_delete' todo.pk %}">Delete</a>
+            </li>
+        {% empty %}
+            <li>No todos yet.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
